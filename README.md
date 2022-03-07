@@ -18,7 +18,7 @@
 
 这个脚本的具体流程大概如下。
 
-1.  **adb shell ls** 获取相册下的所有图片名 放到 **files.txt** 文件中
+1. **adb shell ls** 获取相册下的所有图片名 放到 **files.txt** 文件中
 
    > 这一步你需要手动完成 具体命令在程序中有注释
 
@@ -36,7 +36,7 @@
 
 5. **adb shell rm** 删除手机上的原图
 
-6.  **adb push** 命令把压缩后的文件放回手机
+6. **adb push** 命令把压缩后的文件放回手机
 
 7. **adb am broadcast** 发送广播，让系统相册刷新
 
@@ -62,8 +62,8 @@
 
 7. 执行`python3 ./slim.py`  即可开启瘦身之旅。
 
-## 效果演示
+## 效果演示视频
 
-<video controls width="100%">
-  <source src="https://1drv.conix.tk/uyvk" type="video/mp4">
-</video>
+[Wuuconix's Video Share Site](https://v.conix.tk/?url=https://1drv.conix.tk/uyvk)
+
+或者你可以直接下载此视频进行预览 https://1drv.conix.tk/uyvk
