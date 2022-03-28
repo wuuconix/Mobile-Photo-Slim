@@ -1,2 +1,2 @@
-Broadcasting: Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/DCIM/Camera_Slim/IMG_20220311_152515.jpg flg=0x400000 }
+Broadcasting: Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/DCIM/Camera_Slim/IMG_20220328_175654.jpg flg=0x400000 }
 Broadcast completed: result=0

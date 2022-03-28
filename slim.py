@@ -1,44 +1,31 @@
 from PIL import Image
 import os
 
-""" Warning: 运行此程序前请先执行 adb shell ls /storage/emulated/0/DCIM/Camera > files.txt
-    并手动选择你需要进行瘦身的图片们
-    得到files.txt后注意，由于它是由cmd命令行重定向的，文件编码格式比较神秘，你需要在vscode中通过编码保存为utf-8格式
-"""
+# 把需要压缩的图片复制到origin文件夹中
+# 在cmd中执行 dir /b origin > files.txt 得到需要压缩的图片名们
+# 运行该程序，压缩后的图片将在slim文件夹中。
+
+ori_path = ".\origin"
+tar_path = ".\slim"
 
 def fileList(): #从files.txt里得到文件列表
-    with open("files.txt", "r") as f:
+    with open("files.txt", "r", encoding="utf-8") as f:
         files = f.read().split("\n")
         return files
 
-def rm(filename:str):
-    os.system(f"adb shell rm /storage/emulated/0/DCIM/Camera/{filename} > log.txt")
-
-def pull(filename:str):
-    os.system(f"adb pull /storage/emulated/0/DCIM/Camera/{filename} ./origin/{filename} > log.txt")
-
-def push(filename:str): #push之后需要发送广播刷新mediastroe使相册刷新
-    os.system(f"adb push ./slim/{filename} /storage/emulated/0/DCIM/Camera_Slim/{filename} > log.txt")
-    os.system(f"adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///storage/emulated/0/DCIM/Camera_Slim/{filename} > log.txt")
-
-def slim(filename:str): #将IMG_20220307_170459.jpg 瘦身为 IMG_20220307_170459_slim.jpg 默认quality 75% 大概压缩为原体积的1/5
-    img = Image.open(f"./origin/{filename}")
-    img.save(f"./slim/{filename}", exif = img.info['exif'], quality = 25)
+def slim(filename:str):
+    img = Image.open(f"{ori_path}\\{filename}")
+    img.save(f"{tar_path}\\{filename}" , exif = img.info['exif'], quality = 25)
 
 def size(path:str): #得到图片的空间大小 单位MB
-    size = os.path.getsize(path)
+    size = os.path.getsize(f"{path}")
     return (size / 1000 ** 2)
 
 def start(files:list):
     for filename in files:
-        if filename == "":
-            break
-        pull(filename)
-        fat_size = size(f"./origin/{filename}")
+        fat_size = size(f"{ori_path}\\{filename}")
         slim(filename)
-        slim_size = size(f"./slim/{filename}")
-        rm(filename)
-        push(filename)
+        slim_size = size(f"{tar_path}\\{filename}")
         print(f"🎉{filename} 瘦身完毕 瘦身前{fat_size}MB 瘦身后{slim_size}MB")
     print(f"图片瘦身顺利结束💕")
 
