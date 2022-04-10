@@ -1,4 +1,3 @@
-from PIL import Image
 import os
 
 tar_path = ".\slim"
@@ -7,7 +6,6 @@ def fileList(): #从files.txt里得到文件列表
     with open("files.txt", "r") as f:
         files = f.read().split("\n")
         return files
-
 
 def push(filename:str): #push之后需要发送广播刷新mediastroe使相册刷新
     os.system(f"adb push {tar_path}/{filename} /storage/emulated/0/DCIM/Camera_Slim/{filename} > log.txt")
@@ -18,7 +16,7 @@ def start(files:list):
         if filename == "":
             break
         push(filename)
-        print(f"🎉{filename} 广播成功")
+        print(f"🎉{filename} 上传并广播成功")
 
 files = fileList()
 start(files)
