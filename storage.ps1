@@ -1,18 +1,18 @@
-# ./storage.ps1 ????
+chcp 65001
 $exist = test-path D:\Origin\
 if ($exist -eq $true) {
-    echo "HardDrive Detected Successfully"
-    cp slim/* D:\Slim\
-    echo "Slim copy to HDD successfully"
-    cp origin/* D:\Origin\
-    echo "Origin copy to HDD successfully"
-    # ignore this fucking code. it is ok
-    cp origin/* "C:\Users\15219\OneDrive - uconix\Õº∆¨\ ÷ª˙œ‡≤·"
-    echo "Origin copy to OneDrive successfully"
-    clc files.txt
-    echo "Cleat Contet of ilest.txt successfully"
-    clc log.txt
-    echo "Clear Content of log.txt successfully"
+Write-Output "HardDrive Detected Successfully"
+Copy-Item slim/* D:\Slim\
+Write-Output "Slim copy to HDD successfully"
+Copy-Item origin/* D:\Origin\
+Write-Output "Origin copy to HDD successfully"
+$data = Get-Content path.txt -Encoding utf8
+Copy-Item origin/* $data
+Write-Output "Origin copy to OneDrive successfully"
+Clear-Content files.txt
+Write-Output "Cleat Contet of files.txt successfully"
+Clear-Content log.txt
+Write-Output "Clear Content of log.txt successfully"
 } else {
-    echo "Pleast conect you HDD"
+    Write-Output "Please Connect your HDD"
 }
