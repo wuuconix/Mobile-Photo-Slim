@@ -1,4 +1,3 @@
-chcp 65001
 $exist = test-path D:\Origin\
 if ($exist -eq $true) {
 Write-Output "HardDrive Detected Successfully"
