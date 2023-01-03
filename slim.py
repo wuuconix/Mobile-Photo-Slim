@@ -15,7 +15,10 @@ def fileList(): #从files.txt里得到文件列表
 
 def slim(filename:str):
     img = Image.open(f"{ori_path}\\{filename}")
-    img.save(f"{tar_path}\\{filename}" , exif = img.info['exif'], quality = 25)
+    if 'exif' in img.info:  #图片有exif信息
+        img.save(f"{tar_path}\\{filename}", exif = img.info['exif'], quality = 25)
+    else:                   #图片没有exif信息的情况
+        img.save(f"{tar_path}\\{filename}", quality = 25)
 
 def size(path:str): #得到图片的空间大小 单位MB
     size = os.path.getsize(f"{path}")
